@@ -1,0 +1,52 @@
+n'oubliez pas de nommer la base de donne "cabinet"
+
+CREATE TABLE users (
+  username VARCHAR(20) NOT NULL,
+  nom VARCHAR(50) ,
+  prenom VARCHAR(50),
+  hashed_password VARCHAR(255),
+  date_naissance DATE,
+  telephone VARCHAR(15),
+  image LONGBLOB,
+  sexe VARCHAR(8) NOT NULL,
+  post VARCHAR(8) NOT NULL,
+  primary key(username)
+);
+
+CREATE TABLE conge (
+  id INT(11) primary key AUTO_INCREMENT,
+  doctor VARCHAR(20),
+  date DATE,
+  FOREIGN KEY (doctor) REFERENCES users(username)
+);
+
+
+CREATE TABLE doss_m (
+  id INT(11) primary key AUTO_INCREMENT,
+  titre VARCHAR(15) NOT NULL,
+  File VARCHAR(100),
+  descr VARCHAR(500)NOT NULL,
+  date DATE,
+  username VARCHAR(20),
+  FOREIGN KEY (username) REFERENCES users(username)
+);
+
+
+CREATE TABLE note (
+  id INT(11) primary key AUTO_INCREMENT,
+  text text,
+  username VARCHAR(20),
+    doctor VARCHAR(20),
+  FOREIGN KEY (username) REFERENCES users(username),
+  FOREIGN KEY (doctor) REFERENCES users(username)
+);
+
+CREATE TABLE rdvs (
+  id INT(11) primary key AUTO_INCREMENT,
+  num_seance int(11) NOT NULL,
+  date DATE,
+  username VARCHAR(20),
+  doctor VARCHAR(20),
+  FOREIGN KEY (username) REFERENCES users(username),
+  FOREIGN KEY (doctor) REFERENCES users(username)
+);
